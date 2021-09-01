@@ -1,0 +1,48 @@
+{% extends '../base.twig' %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="/assets/html5-qrcode.min.js"></script>
+{% endblock %}
+
+{% block body %}
+    <div style="width: 500px" id="reader"></div>
+        <script>
+            var html5QrcodeScanner = new Html5QrcodeScanner(
+                "reader", { fps: 10, qrbox: '100%', formatsToSupport: [Html5QrcodeSupportedFormats.QR_CODE] });
+
+            function onScanSuccess(decodedText, decodedResult) {
+
+                fetch("/qrdata/text", {
+                    headers: {
+                        "Accept": "application/json",
+                        "Content-Type": 'application/json'
+                    },
+                    body: JSON.stringify({
+                        raw: decodedText
+                    }),
+                    method: 'post',
+                    strictErrors: true
+                }).then(function(response){
+                    return response.json()
+                }).then(function(response){
+                    console.log({response});
+                    if (response.status !== 200 || response.verification === false){
+                        document.body.style.backgroundColor = 'red';
+                    }  else {
+                        document.body.style.backgroundColor = 'green';
+                    }
+                    html5QrcodeScanner.clear();
+                }).catch(function(error) {
+                    console.log(error);
+                });
+
+            }
+
+            function onScanFailure(err){
+                console.log({err})
+            }
+
+            html5QrcodeScanner.render(onScanSuccess, onScanFailure);
+        </script>
+{% endblock %}

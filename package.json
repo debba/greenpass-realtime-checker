@@ -1,0 +1,43 @@
+{
+  "name": "greenpass-realtime-check",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "type": "module",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "tap \"test/**/*.test.js\"",
+    "start": "fastify start -l info app.js",
+    "dev": "fastify start -w -l info -P app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "base45": "^3.0.0",
+    "buffer-image": "^1.0.0",
+    "cbor": "^7.0.6",
+    "dcc-utils": "^0.0.1",
+    "desm": "^1.1.0",
+    "fastify": "^3.0.0",
+    "fastify-autoload": "^3.3.1",
+    "fastify-cli": "^2.13.0",
+    "fastify-multipart": "^4.0.7",
+    "fastify-plugin": "^3.0.0",
+    "fastify-sensible": "^3.1.0",
+    "got": "^11.8.2",
+    "instascan": "^1.0.0",
+    "jimp": "^0.13.0",
+    "jpeg-js": "^0.4.3",
+    "jsqr": "^1.4.0",
+    "pako": "^1.0.11",
+    "point-of-view": "^4.15.1"
+  },
+  "devDependencies": {
+    "fastify-static": "^4.2.3",
+    "tap": "^15.0.9",
+    "twig": "^1.15.4"
+  }
+}
